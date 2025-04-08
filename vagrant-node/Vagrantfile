@@ -15,7 +15,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 		end
 	end
 	config.vm.define "node-two" do |app|
-		app.vm.box = "bento/ubuntu-22.04"
+		app.vm.box = "bento/ubuntu-24.04"
 		app.vm.network "private_network", ip: "192.168.33.12"
 		app.vm.hostname = "node-two"
 		app.vm.provider "virtualbox" do |v|
