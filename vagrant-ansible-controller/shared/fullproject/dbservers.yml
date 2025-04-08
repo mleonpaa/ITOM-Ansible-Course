@@ -1,6 +1,0 @@
----
-
-- name: dbservers Playbook 
-  hosts: dbservers
-  roles:
-    - mysql

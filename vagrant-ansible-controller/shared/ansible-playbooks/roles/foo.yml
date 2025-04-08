@@ -1,4 +1,0 @@
----
-- name: prueba bucles
-  hosts: all
-  include: tasks.yml
