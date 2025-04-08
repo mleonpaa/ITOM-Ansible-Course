@@ -1,2 +1,3 @@
 vagrant-ansible-controller/.vagrant/
+vagrant-ansible-controller/shared/
 vagrant-node/.vagrant/
