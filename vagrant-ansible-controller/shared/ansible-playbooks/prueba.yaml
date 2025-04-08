@@ -1,0 +1,69 @@
+---
+- hosts: all
+  roles:
+    - apache
+
+
+
+
+
+- name: add several users
+  user: name={{ item }} state=present groups=wheel
+  with_items: "{{ somelist }}"
+
+
+    somelist:
+      - userpro
+      - soporte
+      - apache
+      - weblogic
+
+
+
+---
+- hosts: all
+
+  tasks:
+
+    # first ensure our target directory exists
+    - file: dest=/etc/fooapp state=directory
+
+    # copy each file over that matches the given pattern
+    - copy: src={{ item }} dest=/etc/fooapp/ owner=root mode=600
+      with_fileglob:
+        - /playbooks/files/fooapp/*
+
+
+
+
+
+---
+users:
+  - name: alice
+    authorized:
+      - /tmp/alice/onekey.pub
+      - /tmp/alice/twokey.pub
+    mysql:
+        password: mysql-password
+        hosts:
+          - "%"
+          - "127.0.0.1"
+          - "::1"
+          - "localhost"
+        privs:
+          - "*.*:SELECT"
+          - "DB1.*:ALL"
+  - name: bob
+    authorized:
+      - /tmp/bob/id_rsa.pub
+    mysql:
+        password: other-mysql-password
+        hosts:
+          - "db1"
+        privs:
+          - "*.*:SELECT"
+          - "DB2.*:ALL"
+
+
+
+          

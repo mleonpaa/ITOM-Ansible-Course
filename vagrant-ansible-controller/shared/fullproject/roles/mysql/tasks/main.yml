@@ -1,0 +1,66 @@
+---
+- name: Install MYSQL packages
+  apt: name={{ item }} state=present update_cache=yes
+  loop: "{{ mysql_packages }}"
+  
+
+- name: copy template mysql.cnf to dbserver
+  template:
+    src: mysqld.cnf.j2
+    dest: "{{ mysql_conf_dir }}/mysql.conf.d/mysqld.cnf"
+  notify: restart mysql
+
+- name: Update mysql root password for all root acounts locahost
+  mysql_user:
+    name: root
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    password: "{{ mysql_root_db_pass }}"
+    host: "{{ item }}"
+  loop: 
+    - 127.0.0.1
+    - ::1  # is the IPv6 address for localhost
+    - localhost
+  when: ansible_hostname == 'localhost'
+
+- name: Update mysql root password for all root acounts
+  mysql_user:
+    name: root
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    password: "{{ mysql_root_db_pass }}"
+    host: "{{ item }}"
+  loop:
+    - "{{ ansible_hostname }}"
+    - 127.0.0.1
+    - ::1  # is the IPv6 address for localhost
+    - localhost
+  when: ansible_hostname != 'localhost'
+
+- name: copy template .my.cnf with root passwd to dbserver
+  template:
+    src: .my.cnf.j2
+    dest: ~/.my.cnf
+    mode: 0600
+  notify: restart mysql
+
+#borraremos la BD de test que viene por defecto
+- name: Remove Test Databases
+  mysql_db:
+    name: test
+    state: absent
+
+- name: Create Databases
+  mysql_db:
+    name: "{{ item.name }}"
+    state: present
+  loop: "{{ mysql_db }}"
+  when: mysql_db != 'none'
+
+- name: Create user for DB
+  mysql_user:
+    name: "{{ item.name }}"
+    password: "{{ item.pass }}"
+    priv: "{{ item.priv }}"
+    state: present
+    host: "%" # para todos los hosts
+  loop: "{{ mysql_users }}"
+

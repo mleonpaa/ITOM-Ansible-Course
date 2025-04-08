@@ -1,0 +1,8 @@
+---
+
+- name: Install PHP packages
+  apt: name={{ item }} state=present
+  loop: "{{ php_packages }}"
+  #DESPUES DE INSTALAR php VAMSO A REINICIAR EL APACHE PARA QUE COJA LOS CAMBIOS
+  notify: restart apache
+

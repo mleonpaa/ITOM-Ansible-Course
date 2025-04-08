@@ -1,0 +1,65 @@
+---
+- name: start apache2
+  service: name=apache2 state=started enabled=yes 
+- name: stop apache2
+  service: name=apache2 state=stopped enabled=yes 
+
+
+
+  ---
+  - hosts: all
+    pre_tasks:
+      - name: Actualizar apt cache
+        apt: update_cache=yes cache_valid_time=3600
+        handlers:
+          - include: handlers/handlers.yaml
+    tasks:
+      - include: tasks/common.yaml
+      - include: tasks/apache.yaml
+      - include: tasks/php.yaml
+
+
+-------------
+INVENTARIO
+
+[webservers]
+webserver-one
+webserver-two
+
+[loadbalancers]
+loadbalancer
+
+[dbservers]
+dbserver-one
+dbserver-two
+
+
+  hosts: webservers
+  roles:
+    - role: apache
+    - role: php
+    - role: wordpress
+
+
+
+
+
+
+
+roles/
+  common/
+  apache/
+  nginx/
+  php/
+
+
+  apache/
+    files/
+    templates/
+    tasks/
+    handlers/
+    vars/
+    defaults/
+    meta/
+
+

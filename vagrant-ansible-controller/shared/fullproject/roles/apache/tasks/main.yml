@@ -1,0 +1,36 @@
+---
+- name: Ensure Apache is installed and APT update
+  apt: name={{ item }} state=latest update_cache=yes
+  loop: "{{ apache_packages }}"
+
+- name: Enable Apache modules
+  file:
+    src: "{{ apache_conf_path }}/mods-available/{{ item }}"
+    dest: "{{ apache_conf_path }}/mods-enabled/{{ item }}"
+    state: link
+  loop: "{{ apache_mods_enabled }}"
+  notify: restart apache
+
+- name: send to webservers apache Vhost
+  template:
+    src: "{{ apache_vhosts_template }}"
+    dest: "{{ apache_conf_path }}/sites-available/{{ apache_vhosts_filename }}"
+    owner: root
+    group: root
+    mode: 0644 
+  notify: restart apache
+
+#a2ensite va a buscar en el directorio /etc/apache2/sites-available el nombre del fichero para
+#crear un softlink en sites-enabled
+- name: add Virtualhost in sites-enabled
+  command: a2ensite {{ apache_vhosts_filename }}
+  notify: restart apache
+
+#borramos el softlink del vhosts por defecto de sites-enabled
+- name: Remove default vhosts in sites-enabled
+  file:
+      path: "{{ apache_conf_path }}/sites-enabled/000-default.conf"
+      state: absent
+  notify: restart apache
+
+

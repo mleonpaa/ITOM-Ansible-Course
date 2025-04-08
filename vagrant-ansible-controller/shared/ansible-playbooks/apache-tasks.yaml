@@ -1,0 +1,9 @@
+---
+- name: Instalamos apache a la ultima version
+  apt: name=apache2 state=latest
+  notify: start apache2
+  tags: apache
+  #notify: stop apache2
+
+
+

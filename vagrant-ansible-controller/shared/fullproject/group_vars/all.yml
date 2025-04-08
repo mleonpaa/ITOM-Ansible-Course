@@ -1,0 +1,6 @@
+---
+db_name: wrodpressdb
+db_user: wpuser
+db_pass: wppass
+db_host: 192.168.33.14
+

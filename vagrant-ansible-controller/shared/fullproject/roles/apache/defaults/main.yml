@@ -1,0 +1,35 @@
+---
+apache_packages:
+  - apache2
+  - apache2-utils
+
+apache_mods_enabled:
+  - rewrite.load
+
+#Configuracion apache ubuntu 16.04
+apache_daemon: apache2
+apache_daemon_path: /usr/sbin/
+apache_conf_path: /etc/apache2
+
+#Configurations
+#declaramos el nombre en destino de la config apache y el nombre del template local
+apache_vhosts_filename: "vhosts.conf"
+apache_vhosts_template: "vhosts.conf.j2"
+apache_listen_ip: "*"
+#el mismo que hemos configurado en el haproxy
+apache_listen_port: 80
+
+#busque primero los index.php antes que index.html
+apache_global_vhost_settings: |
+  DirectoryIndex index.php index.html
+
+apache_vhosts:
+- servername: "fp.net"
+  documentroot: "{{ webserver_root }}"
+  #aqui declaramos esta variable porque sera compartida por el role de apache y de wordpress
+  # esta variable la declararemos en el grupo de group_vars de webservers y en el futuro de wordpress
+
+apache_allow_override: "All"
+apache_options: "-Indexes +FollowSymlinks"
+
+

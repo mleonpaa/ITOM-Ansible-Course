@@ -1,0 +1,7 @@
+---
+- hosts: node-one
+  remote_user: root
+  tasks:
+    - include: haproxy-tasks.yaml
+  handlers:
+    - include: haproxy-handlers.yaml

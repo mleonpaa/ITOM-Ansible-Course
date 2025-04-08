@@ -1,0 +1,4 @@
+---
+- name: Instalamos haproxy a la ultima version
+  apt: name=haproxy state=present
+  notify: start haproxy
