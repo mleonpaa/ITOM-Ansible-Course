@@ -8,7 +8,7 @@ VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	config.vm.box = "bento/ubuntu-24.04"
 	config.vm.network "private_network", ip: "192.168.33.10"
-	config.vm.network "forwarded_port", guest: 20, host: 2222, id: "ssh"
+	#config.vm.network "forwarded_port", guest: 20, host: 2222, id: "ssh"
 	config.vm.hostname = "controller"
 	config.vm.synced_folder "shared", "/home/vagrant/"
 	config.vm.provider "virtualbox" do |v|
