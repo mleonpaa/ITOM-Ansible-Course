@@ -8,6 +8,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	config.vm.define "node-one" do |app|
 		app.vm.box = "bento/ubuntu-24.04"
 		app.vm.network "private_network", ip: "192.168.33.11"
+		app.vm.network "forwarded_port", guest: 20, host: 2020, id: "ssh"
 		app.vm.hostname = "node-one"
 		app.vm.provider "virtualbox" do |v|
 			v.memory = 512
@@ -17,6 +18,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	config.vm.define "node-two" do |app|
 		app.vm.box = "bento/ubuntu-24.04"
 		app.vm.network "private_network", ip: "192.168.33.12"
+		app.vm.network "forwarded_port", guest: 20, host: 2022, id: "ssh"
 		app.vm.hostname = "node-two"
 		app.vm.provider "virtualbox" do |v|
 			v.memory = 512
