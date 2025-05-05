@@ -27,7 +27,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 		end
 	end
 	config.vm.define "webserver-two" do |app|
-		app.vm.box = "bento/ubuntu-24.04""
+		app.vm.box = "bento/ubuntu-24.04"
 		app.vm.network "private_network", ip: "192.168.33.13"
 		app.vm.hostname = "webserver-two"
 		app.vm.provision "shell", path: "config.sh"
