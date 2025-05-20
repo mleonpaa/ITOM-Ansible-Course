@@ -1,0 +1,5 @@
+---
+# group_vars/webservers.yml
+http_port: 8080
+ansible_user: web_admin
+

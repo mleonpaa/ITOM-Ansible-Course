@@ -1,0 +1,5 @@
+---
+
+haproxy_config_dir: /etc/haproxy
+haproxy_config_filename: haproxy.cfg
+haproxy_config_template: "{{ haproxy_config_filename }}.j2"

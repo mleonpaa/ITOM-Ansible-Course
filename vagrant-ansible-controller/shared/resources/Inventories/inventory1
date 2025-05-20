@@ -1,0 +1,11 @@
+192.168.33.11 
+192.168.33.12
+
+node-one ansible_host=192.168.33.11 
+node-two ansible_host=192.168.33.12
+
+[nodes]
+node-one ansible_host=192.168.33.11 
+node-two ansible_host=192.168.33.12
+
+

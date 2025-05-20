@@ -1,0 +1,13 @@
+
+name: "Ioannis Georgiou"
+age: 30
+job_role: "DevOps Engineer"
+certified: True
+knowledge:
+  - Ansible
+  - Openshift Container Platform
+  - Docker
+company:
+  name: "NTT DATA"
+  location: "Greece"
+

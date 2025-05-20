@@ -1,0 +1,5 @@
+---
+# group_vars/databases.yml
+database: development
+ansible_user: db_admin
+

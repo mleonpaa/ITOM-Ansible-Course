@@ -1,0 +1,26 @@
+frontend webservers_fd
+    bind *:80
+    mode tcp
+    default_backend webservers_bd
+
+backend webservers_bd
+    mode tcp
+    balance roundrobin
+    {% for host in groups['webservers'] %}
+    server {{ host }} {{ hostvars[host]['ansible_host'] }}:80 check
+    {% endfor %}
+
+
+listen stats
+    bind *:8080
+    mode http
+    stats enable
+    stats uri /stats
+    stats refresh 5s
+
+defaults
+    log global
+    mode tcp
+    option tcplog
+    option dontlognull
+

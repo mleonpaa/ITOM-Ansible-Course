@@ -1,0 +1,17 @@
+---
+
+wp_version: 6.8.1
+wp_url: "https://es.wordpress.org/wordpress-{{wp_version}}-en_GB.zip"
+wp_download_dest: "/tmp/wordpress-{{wp_version}}.zip"
+
+wp_extract_dest: "/var/www"
+wp_documentroot: "{{ wp_extract_dest }}/wordpress" 
+
+wp_config_filename: wp-config.php
+wp_config_template: "{{ wp_config_filename }}.j2"
+
+# Configuration Variables
+wp_table_prefix: "fullproject"
+
+
+

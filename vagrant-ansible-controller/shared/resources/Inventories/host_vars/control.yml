@@ -1,0 +1,4 @@
+---
+# host_vars/control.yml
+ansible_user: admin
+

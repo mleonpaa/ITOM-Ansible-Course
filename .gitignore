@@ -1,3 +1,11 @@
 vagrant-ansible-controller/.vagrant/
-vagrant-ansible-controller/shared/
 vagrant-node/.vagrant/
+vagrant-project/.vagrant/
+vagrant-ansible-controller/shared/*
+vagrant-ansible-controller/shared/Playbooks/*.*
+!vagrant-ansible-controller/shared/*/
+vagrant-ansible-controller/shared/project/*
+!vagrant-ansible-controller/shared/project/*/
+vagrant-ansible-controller/shared/project/roles/*/tasks/
+vagrant-ansible-controller/shared/project/roles/*/handlers/
+vagrant-ansible-controller/shared/roles/

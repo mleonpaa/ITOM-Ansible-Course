@@ -5,14 +5,13 @@
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-	#se define el bloque multimaquina
 	config.vm.define "loadbalancer" do |app|
 		app.vm.box = "bento/ubuntu-24.04"
 		app.vm.network "private_network", ip: "192.168.33.11"
 		app.vm.hostname = "loadbalancer"
 		app.vm.provision "shell", path: "config.sh"
 		app.vm.provider "virtualbox" do |v|
-			v.memory = 256
+			v.memory = 512
 			v.cpus = 1
 		end
 	end
@@ -22,7 +21,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 		app.vm.hostname = "webserver-one"
 		app.vm.provision "shell", path: "config.sh"
 		app.vm.provider "virtualbox" do |v|
-			v.memory = 256
+			v.memory = 512
 			v.cpus = 1
 		end
 	end
@@ -32,7 +31,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 		app.vm.hostname = "webserver-two"
 		app.vm.provision "shell", path: "config.sh"
 		app.vm.provider "virtualbox" do |v|
-			v.memory = 256
+			v.memory = 512
 			v.cpus = 1
 		end
 	end
@@ -42,7 +41,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 		app.vm.hostname = "dbserver"
 		app.vm.provision "shell", path: "config.sh"
 		app.vm.provider "virtualbox" do |v|
-			v.memory = 256
+			v.memory = 512
 			v.cpus = 1
 		end
 	end

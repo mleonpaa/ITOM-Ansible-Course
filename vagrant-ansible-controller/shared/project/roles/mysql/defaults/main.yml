@@ -1,0 +1,32 @@
+---
+
+mysql_packages:
+  - mysql-server
+  - python3-pymysql
+
+mysql_config_dir: /etc/mysql/mysql.conf.d
+mysql_config_filename: mysqld.cnf
+mysql_config_template: "{{ mysql_config_filename }}.j2"
+
+
+mysql_my_config_dir: "{{ ansible_env.HOME }}"
+mysql_my_config_filename: .my.cnf
+mysql_my_config_template: "{{ mysql_my_config_filename }}.j2"
+
+
+mysql_root_db_pass : root
+
+mysql_dbs:
+  - "{{ db_name }}"
+
+mysql_db_users: 
+  - name: "{{ db_user }}"
+    password: "{{ db_pass }}"
+    priv: "*.*:ALL"
+
+mysql_login_unix_socket: /var/run/mysqld/mysqld.sock
+
+#MySQL Configuration variables
+
+mysql_port: 3306
+mysql_bind_address: "0.0.0.0"

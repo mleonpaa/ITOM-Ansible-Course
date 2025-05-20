@@ -1,0 +1,6 @@
+- name: Application 1
+  debug:
+    msg: "This is Application 1"
+
+
+  
